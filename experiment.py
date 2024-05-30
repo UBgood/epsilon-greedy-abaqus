@@ -30,18 +30,19 @@ def run_experiment(m1, m2, m3, eps, N): #eps is the ideal value we try to mainta
         
     for i in range(N): 
         # epsilon greedy 
-        p = np.random.random() #take arbitrary action let 
+        #p = np.random.random() #take arbitrary action let  
+        p = 0.1 + (0.001 - 0.1) * np.random.random()
         if p < eps: 
             jtarget = np.random.choice(3) 
-            x = arms[j].choose() 
+            x = arms[jtarget].choose() 
             # Check the condition on the chosen action `j` #Let J= deformation 
-            if jtarget <= 1: #1 represents the ideal value how can I make it a range? if it is a range then it is the optimal value  
+            if (0.5 <= jtarget <= 1): #1 represents the ideal value how can I make it a range? if it is a range then it is the optimal value  
                 x = np.max([a.choose() for a in arms])
             else:
                 x = np.min([a.choose() for a in arms])
         else: 
            jtarget = np.argmax([a.mean for a in arms]) 
-            #x = actions[j].choose() 
+        x = arms[jtarget].choose() 
         arms[jtarget].update(x) 
         #if p < eps: #let p be the deformation value which could be a range 
 
