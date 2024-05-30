@@ -30,12 +30,17 @@ def run_experiment(m1, m2, m3, eps, N): #eps is the ideal value we try to mainta
         
     for i in range(N): 
         # epsilon greedy 
+<<<<<<< HEAD
         #p = np.random.random() #take arbitrary action let 
         p = 0.001 + (0.1 - 0.001) * np.random.random() 
         print('\np value')
         print(p)
 
         if p < eps: #takes number in range 
+=======
+        p = np.random.random() #take arbitrary action let 
+        if p < eps: #p could be a range
+>>>>>>> dfbd0e36125fe0b4869ec6fcf1b44d6f900f0e49
             jtarget = np.random.choice(3) 
             x = arms[jtarget].choose() 
             # Check the condition on the chosen action `j` #Let J= deformation 
