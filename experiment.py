@@ -10,7 +10,7 @@ class Arms:
         self.mean = 0 # mean reward of the action
         #self.mini = 0
         #self.maxi = 1
-        self.N = 0 (number of iterations)
+        self.N = 0 #number of iterations
 
     # Choose a random action 
     def choose(self): 
@@ -30,14 +30,26 @@ def run_experiment(m1, m2, m3, eps, N): #eps is the ideal value we try to mainta
         
     for i in range(N): 
         # epsilon greedy 
-        p = np.random.random() #take arbitrary action
-        if p < eps: #let p be the deformation value which could be a range 
-
-            j = np.random.choice(3) #The purpose of using np.random.choice(3) in this context is to ensure that during the exploration phase, the algorithm randomly selects one of the three actions, providing a way to gather more information about all actions rather than sticking to the currently known best action.
+        p = np.random.random() #take arbitrary action let 
+        if p < eps: 
+            jtarget = np.random.choice(3) 
+            x = arms[j].choose() 
+            # Check the condition on the chosen action `j` #Let J= deformation 
+            if jtarget <= 1: #1 represents the ideal value how can I make it a range? if it is a range then it is the optimal value  
+                x = np.max([a.choose() for a in arms])
+            else:
+                x = np.min([a.choose() for a in arms])
         else: 
-            j = np.argmax([a.mean for a in arms]) 
-        x = arms[j].choose() 
-        arms[j].update(x) 
+           jtarget = np.argmax([a.mean for a in arms]) 
+            #x = actions[j].choose() 
+        arms[jtarget].update(x) 
+        #if p < eps: #let p be the deformation value which could be a range 
+
+            #j = np.random.choice(3) #The purpose of using np.random.choice(3) in this context is to ensure that during the exploration phase, the algorithm randomly selects one of the three actions, providing a way to gather more information about all actions rather than sticking to the currently known best action.
+        #else: 
+            #j = np.argmax([a.mean for a in arms]) 
+        #x = arms[j].choose() 
+        #arms[j].update(x) 
      
         
 
@@ -53,6 +65,9 @@ def run_experiment(m1, m2, m3, eps, N): #eps is the ideal value we try to mainta
     # plt.xscale('log') 
     # plt.show() 
 
+    #plot rewards vs iterations to see how many iterations are close to the ideal value (N vs ideal value)
+    #plot a graph that gives how many actions are closer to the ideal value (actions vs ideal value)
+
     for a in arms: 
         print(a.mean) 
 
@@ -65,3 +80,5 @@ if __name__ == '__main__':
     c_1 = run_experiment(1.0, 2.0, 3.0, 0.1, 100000) 
     c_05 = run_experiment(1.0, 2.0, 3.0, 0.05, 100000) 
     c_01 = run_experiment(1.0, 2.0, 3.0, 0.01, 100000) 
+
+    #error= summation of J value- ideal values/U values
