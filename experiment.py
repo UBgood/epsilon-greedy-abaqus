@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 class Arms: 
     def __init__(self, m): 
         #range values min and max. N remains and m defines its number. 
-        self.m = m  #fixed reward vale for action
+        self.m = m  #fixed reward value for action
         self.mean = 0 # mean reward of the action
         #self.mini = 0
         #self.maxi = 1
