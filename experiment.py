@@ -88,5 +88,5 @@ if __name__ == '__main__':
     c_1 = run_experiment(1.0, 2.0, 3.0, 0.1, 10) 
     #c_05 = run_experiment(1.0, 2.0, 3.0, 0.05, 100000) 
     #c_01 = run_experiment(1.0, 2.0, 3.0, 0.01, 100000) 
-
-    #error= summation of J value- ideal values/U values
+else
+    error= summation of J value- ideal values/U values
